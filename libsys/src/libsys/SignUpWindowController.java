@@ -13,6 +13,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class SignUpWindowController extends Application{
@@ -43,17 +45,12 @@ public class SignUpWindowController extends Application{
 
     @FXML
     private TextField login;
+    
+    @FXML
+    private Text error;
 
     @FXML
     void initialize() {
-        assert confirm != null : "fx:id=\"confirm\" was not injected: check your FXML file 'SignUpWindow.fxml'.";
-        assert cancel != null : "fx:id=\"cancel\" was not injected: check your FXML file 'SignUpWindow.fxml'.";
-        assert password != null : "fx:id=\"password\" was not injected: check your FXML file 'SignUpWindow.fxml'.";
-        assert professor != null : "fx:id=\"professor\" was not injected: check your FXML file 'SignUpWindow.fxml'.";
-        assert student != null : "fx:id=\"student\" was not injected: check your FXML file 'SignUpWindow.fxml'.";
-        assert comunity != null : "fx:id=\"comunity\" was not injected: check your FXML file 'SignUpWindow.fxml'.";
-        assert login != null : "fx:id=\"login\" was not injected: check your FXML file 'SignUpWindow.fxml'.";
-        
         ToggleGroup group = new ToggleGroup();
         
         professor.setToggleGroup(group);
@@ -63,6 +60,19 @@ public class SignUpWindowController extends Application{
         cancel.setOnAction(event->{
             Stage stage = (Stage) cancel.getScene().getWindow();
             stage.close();
+        });
+        
+        confirm.setOnAction(event->{
+        	if(group.getSelectedToggle() == null || login.getText().equals("") || password.getText().equals("")){
+        		error.setFill(Color.RED);
+        	} else {
+        		RadioButton rb = (RadioButton) group.getSelectedToggle();
+        		try {
+					new Cliente().createNewCliente(login.getText(), password.getText(), rb.getText());
+				} catch (Exception e) {
+					System.out.println("Um erro ocorreu!");
+				}
+        	}
         });
     }
 

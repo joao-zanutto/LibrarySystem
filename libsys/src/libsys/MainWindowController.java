@@ -42,6 +42,9 @@ public class MainWindowController extends Application{
     
     @FXML
     private ComboBox<Integer> month;
+    
+    @FXML
+    private Button newbook;
 
     @FXML
     void initialize() {
@@ -53,6 +56,14 @@ public class MainWindowController extends Application{
         newregistry.setOnAction(event->{
         	try {
 				new SignUpWindowController().start(new Stage());
+			} catch (Exception e) {
+				System.out.println("Um erro ocorreu!");
+			}
+        });
+        
+        newbook.setOnAction(event->{
+        	try {
+				new NewBookWindowController().start(new Stage());
 			} catch (Exception e) {
 				System.out.println("Um erro ocorreu!");
 			}

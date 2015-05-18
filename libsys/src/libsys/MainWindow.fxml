@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libsys.MainWindowController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libsys.MainWindowController">
    <children>
       <TextField fx:id="login" layoutX="79.0" layoutY="52.0" />
       <Label layoutX="16.0" layoutY="57.0" text="Login:" />
@@ -17,10 +17,14 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <Button fx:id="confirm" layoutX="16.0" layoutY="195.0" mnemonicParsing="false" text="Confirmar" />
-      <Button fx:id="newregistry" layoutX="146.0" layoutY="195.0" mnemonicParsing="false" text="Novo Cadastro" />
-      <ComboBox fx:id="day" layoutX="13.0" layoutY="144.0" prefHeight="31.0" prefWidth="86.0" />
-      <ComboBox fx:id="month" layoutX="110.0" layoutY="144.0" prefHeight="31.0" prefWidth="86.0" />
-      <TextField fx:id="year" layoutX="205.0" layoutY="144.0" prefHeight="31.0" prefWidth="86.0" />
+      <Button fx:id="confirm" layoutX="16.0" layoutY="227.0" mnemonicParsing="false" text="Confirmar" />
+      <Button fx:id="newregistry" layoutX="128.0" layoutY="227.0" mnemonicParsing="false" text="Novo Cadastro" />
+      <ComboBox fx:id="day" layoutX="13.0" layoutY="179.0" prefHeight="31.0" prefWidth="86.0" />
+      <ComboBox fx:id="month" layoutX="147.0" layoutY="179.0" prefHeight="31.0" prefWidth="86.0" />
+      <TextField fx:id="year" layoutX="272.0" layoutY="179.0" prefHeight="31.0" prefWidth="86.0" />
+      <Button fx:id="newbook" layoutX="269.0" layoutY="227.0" mnemonicParsing="false" text="Novo Livro" />
+      <Label layoutX="40.0" layoutY="150.0" text="Dia" />
+      <Label layoutX="176.0" layoutY="150.0" text="Mês" />
+      <Label layoutX="301.0" layoutY="150.0" text="Ano" />
    </children>
 </Pane>

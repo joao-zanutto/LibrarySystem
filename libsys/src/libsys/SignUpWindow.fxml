@@ -24,5 +24,6 @@
       <RadioButton fx:id="professor" layoutX="361.0" layoutY="73.0" mnemonicParsing="false" text="Professor" />
       <RadioButton fx:id="student" layoutX="361.0" layoutY="97.0" mnemonicParsing="false" text="Aluno" />
       <RadioButton fx:id="comunity" layoutX="361.0" layoutY="122.0" mnemonicParsing="false" text="Comunidade" />
+      <Text fx:id="error" fill="#ff000000" layoutX="361.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Um erro ocorreu!" />
    </children>
 </Pane>
