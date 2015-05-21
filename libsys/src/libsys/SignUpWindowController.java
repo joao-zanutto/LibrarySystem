@@ -69,6 +69,8 @@ public class SignUpWindowController extends Application{
         		RadioButton rb = (RadioButton) group.getSelectedToggle();
         		try {
 					new Cliente().createNewCliente(login.getText(), password.getText(), rb.getText());
+					Stage stage = (Stage) cancel.getScene().getWindow();
+		            stage.close();
 				} catch (Exception e) {
 					System.out.println("Um erro ocorreu!");
 				}

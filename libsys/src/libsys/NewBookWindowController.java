@@ -10,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class NewBookWindowController {
@@ -36,11 +39,30 @@ public class NewBookWindowController {
     private TextField bookname;
 
     @FXML
+    private Text error;
+    
+    @FXML
     void initialize() {
+    	ToggleGroup group = new ToggleGroup();
+    	
     	cancel.setOnAction(event->{
             Stage stage = (Stage) cancel.getScene().getWindow();
             stage.close();
         });
+    	
+    	geral.setToggleGroup(group);
+    	texto.setToggleGroup(group);
+    	
+    	confirm.setOnAction(event->{
+    		if(group.getSelectedToggle() == null || bookname.getText().equals("")){
+        		error.setFill(Color.RED);
+        	} else {
+        		RadioButton rb = (RadioButton) group.getSelectedToggle();
+        		new Books().addBook(bookname.getText(), rb.getText());
+        		Stage stage = (Stage) cancel.getScene().getWindow();
+	            stage.close();
+        	}
+    	});
     }
     
     FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBookWindow.fxml"));

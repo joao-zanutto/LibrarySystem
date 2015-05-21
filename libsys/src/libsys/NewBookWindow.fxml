@@ -19,7 +19,8 @@
       <RadioButton fx:id="texto" layoutX="126.0" layoutY="113.0" mnemonicParsing="false" text="Texto" />
       <RadioButton fx:id="geral" layoutX="202.0" layoutY="113.0" mnemonicParsing="false" text="Geral" />
       <Label layoutX="62.0" layoutY="113.0" text="Tipo:" />
-      <Button fx:id="confirm" layoutX="325.0" layoutY="64.0" mnemonicParsing="false" text="Confirmar" />
-      <Button fx:id="cancel" layoutX="330.0" layoutY="108.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="confirm" layoutX="324.0" layoutY="37.0" mnemonicParsing="false" text="Confirmar" />
+      <Button fx:id="cancel" layoutX="329.0" layoutY="75.0" mnemonicParsing="false" text="Cancelar" />
+      <Text fx:id="error" fill="TRANSPARENT" layoutX="310.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Um erro ocorreu!" />
    </children>
 </Pane>
