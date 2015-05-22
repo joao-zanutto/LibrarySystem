@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Cliente {
 	private String login;
@@ -35,5 +36,29 @@ public class Cliente {
 		} else {
 			System.out.println("Cliente já cadastrado no banco de dados");
 		}
+	}
+	
+	public boolean autenticaCliente(String username, String password){
+		File file = new File(username+".csv");
+		try {
+			if(!file.exists()){
+				return false;
+			}
+			
+			Scanner sc = new Scanner(file.getAbsoluteFile());
+			if(sc.nextLine().equals(password)){
+				sc.close();
+				return true;
+			} else {
+				sc.close();
+				return false;
+			}
+			
+		} catch (IOException e) {
+			System.out.println("Um erro ocorreu!");
+		}
+		
+		
+		return false;
 	}
 }

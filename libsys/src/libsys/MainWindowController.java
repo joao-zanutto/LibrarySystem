@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainWindowController extends Application{
@@ -45,6 +47,9 @@ public class MainWindowController extends Application{
     
     @FXML
     private Button newbook;
+    
+    @FXML
+    private Text error2;
 
     @FXML
     void initialize() {
@@ -52,6 +57,20 @@ public class MainWindowController extends Application{
     			18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);    	
     	
     	month.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    	
+    	confirm.setOnAction(event->{
+    		if(login.getText().equals("") || password.getText().equals("")){
+    			error2.setFill(Color.RED);
+    		} else {
+	    		
+	    		boolean result = new Cliente().autenticaCliente(login.getText(), password.getText());
+	    		if(result == false){
+	    			error2.setFill(Color.RED);
+	    		} else {
+	    			// ABRIR NOVA JANELA
+	    		}
+    		}
+    	});
     	
         newregistry.setOnAction(event->{
         	try {
