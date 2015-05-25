@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libsys.LibraryWindowController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Bem-Vindo, ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Text fx:id="name" layoutX="145.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <ListView fx:id="yourBooks" layoutX="45.0" layoutY="145.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="availableBooks" layoutX="365.0" layoutY="145.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button fx:id="loan" layoutX="105.0" layoutY="355.0" mnemonicParsing="false" text="Devolver" />
+      <Label layoutX="92.0" layoutY="124.0" text="Livros com você" />
+      <Label layoutX="407.0" layoutY="124.0" text="Livros disponíveis" />
+      <Button fx:id="giveBack" layoutX="421.0" layoutY="355.0" mnemonicParsing="false" text="Emprestar" />
+      <Button fx:id="save" layoutX="335.0" layoutY="49.0" mnemonicParsing="false" text="Salvar e Sair" />
+      <Button fx:id="quit" layoutX="449.0" layoutY="49.0" mnemonicParsing="false" text="Sair sem salvar" />
+   </children>
+</Pane>
