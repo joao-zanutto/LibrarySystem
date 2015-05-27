@@ -1,10 +1,36 @@
 package libsys;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
+import javafx.collections.ObservableList;
 
 public class Books {
+	public void getBooks(ObservableList<Book> list){
+		File file = new File("books.csv");
+		try {
+			Scanner fr = new Scanner(file);
+			fr.useDelimiter(",");
+			while(fr.hasNextLine()){
+				String bookname = fr.next();
+				fr.skip(",");
+				String s = fr.nextLine();
+				int booktype = Integer.parseInt(s);
+				list.add(new Book(bookname, booktype));
+			}
+			fr.close();
+		} catch (FileNotFoundException e) {
+			System.out.print("Um erro ocorreu!");
+		}
+	}
+	
+	public void removeBook(ObservableList<Book> list, int index){
+		list.remove(index);
+	}
+	
 	public void addBook(String bookname, String type){
 		int intType;
 		
@@ -28,7 +54,7 @@ public class Books {
 			FileWriter fw = new FileWriter(file, true);
 			
 			fw.append(bookname);
-			fw.append(", ");
+			fw.append(",");
 			fw.append(""+intType);
 			fw.append("\n");
 			

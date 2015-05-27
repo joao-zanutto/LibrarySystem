@@ -17,6 +17,25 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainWindowController extends Application{
+	private static int numDay, numYear, numMonth;
+	private static String client;
+	
+	public static String getClient(){
+		return client;
+	}
+	
+	public static int getDay(){
+		return numDay;
+	}
+	
+	public static int getMonth(){
+		return numMonth;
+	}
+	
+	public static int getYear(){
+		return numYear;
+	}
+	
     @FXML
     private ResourceBundle resources;
 
@@ -49,7 +68,7 @@ public class MainWindowController extends Application{
     
     @FXML
     private Text error2;
-
+    
     // Initialize que monta a configuração do programa
     @FXML
     void initialize() {
@@ -73,19 +92,34 @@ public class MainWindowController extends Application{
     			error2.setFill(Color.RED);
     		} else {
 	    		boolean result = new Cliente().autenticaCliente(login.getText(), password.getText());
+	    		
+	    		// Erro caso o usuario e a senha nao batam
 	    		if(result == false){
 	    			error2.setText("Impossível validar");
 	    			error2.setFill(Color.RED);
-	    		} else {
+	    		}
+	    		
+	    		// Sucesso no Login(caso o ano seja um numero)
+	    		else {
 	    			try {
 						LibraryWindowController lwc = new LibraryWindowController();
-						lwc.setDay(day.getValue());
-						lwc.setMonth(month.getValue());
-						lwc.setYear(Integer.parseInt(year.getText()));
-						lwc.setClient(login.getText());
+						MainWindowController.numDay = day.getValue();
+						MainWindowController.numMonth = month.getValue();
+						MainWindowController.numYear = Integer.parseInt(year.getText());
+						MainWindowController.client = new String(login.getText());
 						lwc.start(new Stage());
-					} catch (Exception e) {
-						System.out.println("Um erro ocorreu!");
+					} 
+	    			
+	    			// Catch para o erro de o ano não ser um número
+	    			catch (NumberFormatException e) {
+						error2.setText("Ano deve ser um numero");
+						error2.setFill(Color.RED);
+					} 
+	    			
+	    			// Catch para quaisquer outros erros
+	    			catch (Exception e){
+						error2.setText("Um erro ocorreu!");
+						error2.setFill(Color.RED);
 					}
 	    		}
     		}

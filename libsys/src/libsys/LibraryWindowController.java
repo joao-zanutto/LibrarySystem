@@ -11,29 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LibraryWindowController {
-	private int day, month, year;
-	private String client;
-	
-	public void setDay(int day){
-		this.day = day;
-	}
-	
-	public void setMonth(int month){
-		this.month = month;
-	}
-	
-	public void setYear(int year){
-		this.year = year;
-	}
-	
-	public void setClient(String login){
-		this.client = login;
-	}
-
     @FXML
     private ResourceBundle resources;
 
@@ -44,7 +26,7 @@ public class LibraryWindowController {
     private Button loan;
 
     @FXML
-    private ListView<String> yourBooks;
+    private ListView<Book> yourBooks;
 
     @FXML
     private Text name;
@@ -53,30 +35,56 @@ public class LibraryWindowController {
     private Button save;
 
     @FXML
-    private ListView<String> availableBooks;
+    private ListView<Book> availableBooks;
 
     @FXML
     private Button giveBack;
 
     @FXML
     private Button quit;
+    
+    @FXML
+    private Text noBook;
 
     @FXML
     void initialize() {
-    	name.setText(client);
-    	System.out.print(client);
+    	name.setText(MainWindowController.getClient());
     	
-        ObservableList<String> yourBooksList = FXCollections.observableArrayList(
-        		
-        		);
-        
-        ObservableList<String> availableBooksList = FXCollections.observableArrayList(
-        		
-        		);
+    	quit.setOnAction(event->{
+    		System.out.print(new Cliente().getClienteType(MainWindowController.getClient()));
+    		Stage stage = (Stage) quit.getScene().getWindow();
+            stage.close();
+    	});
+    	
+        ObservableList<Book> yourBooksList = FXCollections.observableArrayList();
+        // GetBOOKS do usuario
         yourBooks.setItems(yourBooksList);
+        
+        ObservableList<Book> availableBooksList = FXCollections.observableArrayList();
+        new Books().getBooks(availableBooksList);
         availableBooks.setItems(availableBooksList);
         
+        loan.setOnAction(event->{
+        	if(new Cliente().getClienteType(MainWindowController.getClient()) == 3 && availableBooks.getSelectionModel().getSelectedItem().getBookType() == 2)
+        		noBook.setFill(Color.RED);
+        	else{
+	        	if(availableBooks.getSelectionModel().getSelectedItem() == null){
+	        	} else {
+	        		noBook.setFill(Color.TRANSPARENT);
+		        	yourBooksList.add(availableBooks.getSelectionModel().getSelectedItem());
+		        	new Books().removeBook(availableBooksList, availableBooks.getSelectionModel().getSelectedIndex());
+	        	}
+        	}
+        });
         
+        giveBack.setOnAction(event->{
+        	
+        	if(yourBooks.getSelectionModel().getSelectedItem() == null){
+        	} else {
+	        	availableBooksList.add(yourBooks.getSelectionModel().getSelectedItem());
+	        	new Books().removeBook(yourBooksList, yourBooks.getSelectionModel().getSelectedIndex());
+        	}
+        });
     }
     
     

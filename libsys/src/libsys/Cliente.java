@@ -2,6 +2,7 @@ package libsys;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,6 +11,22 @@ public class Cliente {
 	private String login;
 	private String password;
 	private int intType; // 1-Aluno, 2-Professor, 3-Comunidade
+	
+	public int getClienteType(String filename){
+		File file = new File(filename+".csv");
+		int type = 0;
+		try {
+			Scanner fr = new Scanner(file);
+			fr.nextLine();
+			String s = fr.nextLine();
+			type = Integer.parseInt(s);
+			fr.close();
+		} catch (FileNotFoundException e) {
+			System.out.print("Um erro ocorreu!");
+		}
+		
+		return type;
+	}
 	
 	public void createNewCliente(String login, String password, String type) throws IOException{
 		this.login = login;
