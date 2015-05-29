@@ -27,11 +27,34 @@ public class Books {
 		}
 	}
 	
+	public void getBooks(ObservableList<Book> bk, String usuario){
+		File file = new File(usuario + ".csv");
+		try {
+			Scanner sc = new Scanner(file);
+			sc.nextLine();
+			sc.nextLine();
+			sc.useDelimiter(",");
+			
+			while(sc.hasNextLine()){
+				String s = sc.next();
+				sc.skip(",");
+				String s2 = sc.nextLine();
+				int i = Integer.parseInt(s2);
+				Book b = new Book(s, i);
+				bk.add(b);
+			}
+			
+			sc.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Um erro ocorreu!");
+		}
+	}
+	
 	public void removeBook(ObservableList<Book> list, int index){
 		list.remove(index);
 	}
 	
-	public void addBook(String bookname, String type){
+	public void addBook(String bookname, String type, String filename){
 		int intType;
 		
 		// Tipo do texto foi convertido para int
@@ -42,7 +65,7 @@ public class Books {
 		}
 		
 		// Arquivo criado (se já não existia)
-		File file = new File("books.csv");
+		File file = new File(filename);
 		try {
 			file.createNewFile();
 		} catch (IOException e) {

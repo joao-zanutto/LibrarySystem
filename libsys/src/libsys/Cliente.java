@@ -55,6 +55,26 @@ public class Cliente {
 		}
 	}
 	
+	public void createNewCliente(String login, String password, int type) throws IOException{
+		this.login = login;
+		this.password = password;
+		
+		File newFile = new File(this.login+".csv");
+		if(newFile.createNewFile()){
+			FileWriter fw = new FileWriter(newFile.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+			bw.write(this.password);
+			bw.newLine();
+			bw.write(""+type);
+			bw.newLine();
+			
+			bw.close();
+		} else {
+			System.out.println("Cliente já cadastrado no banco de dados");
+		}
+	}
+	
 	public boolean autenticaCliente(String username, String password){
 		File file = new File(username+".csv");
 		try {

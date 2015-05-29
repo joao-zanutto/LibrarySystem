@@ -17,11 +17,20 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainWindowController extends Application{
-	private static int numDay, numYear, numMonth;
+	private static int numDay, numYear, numMonth, type;
 	private static String client;
+	private static String passwordS;
+	
+	public static int getType(){
+		return type;
+	}
 	
 	public static String getClient(){
 		return client;
+	}
+	
+	public static String getPassword(){
+		return passwordS;
 	}
 	
 	public static int getDay(){
@@ -107,6 +116,8 @@ public class MainWindowController extends Application{
 						MainWindowController.numMonth = month.getValue();
 						MainWindowController.numYear = Integer.parseInt(year.getText());
 						MainWindowController.client = new String(login.getText());
+						MainWindowController.passwordS = new String(password.getText());
+						MainWindowController.type = new Cliente().getClienteType(client);
 						lwc.start(new Stage());
 					} 
 	    			
@@ -118,6 +129,7 @@ public class MainWindowController extends Application{
 	    			
 	    			// Catch para quaisquer outros erros
 	    			catch (Exception e){
+	    				e.printStackTrace();
 						error2.setText("Um erro ocorreu!");
 						error2.setFill(Color.RED);
 					}

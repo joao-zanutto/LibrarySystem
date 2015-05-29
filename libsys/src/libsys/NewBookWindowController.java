@@ -58,7 +58,7 @@ public class NewBookWindowController {
         		error.setFill(Color.RED);
         	} else {
         		RadioButton rb = (RadioButton) group.getSelectedToggle();
-        		new Books().addBook(bookname.getText(), rb.getText());
+        		new Books().addBook(bookname.getText(), rb.getText(), "books.csv");
         		Stage stage = (Stage) cancel.getScene().getWindow();
 	            stage.close();
         	}

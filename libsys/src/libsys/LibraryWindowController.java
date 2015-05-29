@@ -1,5 +1,6 @@
 package libsys;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,25 +52,55 @@ public class LibraryWindowController {
     	name.setText(MainWindowController.getClient());
     	
     	quit.setOnAction(event->{
-    		System.out.print(new Cliente().getClienteType(MainWindowController.getClient()));
+    		System.out.println(new Cliente().getClienteType(MainWindowController.getClient()));
     		Stage stage = (Stage) quit.getScene().getWindow();
             stage.close();
     	});
     	
         ObservableList<Book> yourBooksList = FXCollections.observableArrayList();
-        // GetBOOKS do usuario
+        new Books().getBooks(yourBooksList, MainWindowController.getClient());
         yourBooks.setItems(yourBooksList);
         
         ObservableList<Book> availableBooksList = FXCollections.observableArrayList();
         new Books().getBooks(availableBooksList);
         availableBooks.setItems(availableBooksList);
         
+        save.setOnAction(event->{
+        	// ACAO NO BOOKS.CSV
+        	File file = new File("books.csv");
+        	file.delete();
+        	try {
+				file.createNewFile();
+			} catch (Exception e1) {
+				System.out.println("Um erro ocorreu!");
+			}
+    		for(Book b : availableBooksList){
+    			new Books().addBook(b.getBookName(), ""+b.getBookType(), "books.csv");
+    		}
+    		
+    		// ACAO NO USUARIO.CSV
+    		File ofile = new File(MainWindowController.getClient()+".csv");
+    		ofile.delete();
+    		try {
+    			System.out.println(MainWindowController.getClient() + " " + MainWindowController.getPassword() + " " + MainWindowController.getType());
+				new Cliente().createNewCliente(MainWindowController.getClient(), MainWindowController.getPassword(), MainWindowController.getType());
+			} catch (Exception e) {
+				System.out.println("Um erro ocorreu!");
+			}
+    		for(Book b : yourBooksList){
+    			new Books().addBook(b.getBookName(), ""+b.getBookType(), MainWindowController.getClient()+".csv");
+    		}
+    		Stage stage = (Stage) quit.getScene().getWindow();
+            stage.close();
+    	});
+        
         loan.setOnAction(event->{
-        	if(new Cliente().getClienteType(MainWindowController.getClient()) == 3 && availableBooks.getSelectionModel().getSelectedItem().getBookType() == 2)
-        		noBook.setFill(Color.RED);
-        	else{
-	        	if(availableBooks.getSelectionModel().getSelectedItem() == null){
-	        	} else {
+        	if(availableBooks.getSelectionModel().getSelectedItem() == null){
+        	} else {
+	        	if(new Cliente().getClienteType(MainWindowController.getClient()) == 3 && availableBooks.getSelectionModel().getSelectedItem().getBookType() == 2)
+	        		noBook.setFill(Color.RED);
+	        	
+	        	else{
 	        		noBook.setFill(Color.TRANSPARENT);
 		        	yourBooksList.add(availableBooks.getSelectionModel().getSelectedItem());
 		        	new Books().removeBook(availableBooksList, availableBooks.getSelectionModel().getSelectedIndex());
@@ -78,9 +109,9 @@ public class LibraryWindowController {
         });
         
         giveBack.setOnAction(event->{
-        	
         	if(yourBooks.getSelectionModel().getSelectedItem() == null){
         	} else {
+        		noBook.setFill(Color.TRANSPARENT);
 	        	availableBooksList.add(yourBooks.getSelectionModel().getSelectedItem());
 	        	new Books().removeBook(yourBooksList, yourBooks.getSelectionModel().getSelectedIndex());
         	}
