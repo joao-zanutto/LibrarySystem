@@ -12,6 +12,7 @@ public class Cliente {
 	private String password;
 	private int intType; // 1-Aluno, 2-Professor, 3-Comunidade
 	
+	// Le o arquivo filename e retorna o tipo do cliente
 	public int getClienteType(String filename){
 		File file = new File(filename+".csv");
 		int type = 0;
@@ -28,6 +29,8 @@ public class Cliente {
 		return type;
 	}
 	
+	// Cria um novo cliente de nome login, senha password e tipo type
+	//  AQUI TYPE É UMA STRING, QUE É VERIFICADA E TRANSFORMADA EM INT
 	public void createNewCliente(String login, String password, String type) throws IOException{
 		this.login = login;
 		this.password = password;
@@ -55,6 +58,8 @@ public class Cliente {
 		}
 	}
 	
+	// Cria um novo cliente de nome login, senha password e tipo type
+	//  AQUI TYPE É UM INTEIRO
 	public void createNewCliente(String login, String password, int type) throws IOException{
 		this.login = login;
 		this.password = password;
@@ -75,6 +80,7 @@ public class Cliente {
 		}
 	}
 	
+	// Verifica se os dados inseridos em username e password batem com os do banco de dados
 	public boolean autenticaCliente(String username, String password){
 		File file = new File(username+".csv");
 		try {
@@ -94,8 +100,6 @@ public class Cliente {
 		} catch (IOException e) {
 			System.out.println("Um erro ocorreu!");
 		}
-		
-		
 		return false;
 	}
 }
